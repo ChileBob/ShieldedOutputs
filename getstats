@@ -9,6 +9,8 @@ package common;
 
 use Data::Dumper;
 use JSON;
+use strict;
+use warnings;
 
 my $node_client = 'ycash-cli';								# ycash client
 
@@ -60,7 +62,7 @@ sub node_cli {
 
 	my ($command, $data) = @_;
 
-	my $response = `$node_client $command $data 2>/dev/null`;			# every time you use backticks a puppy dies :-(
+	my $response = qx{$node_client $command 2>/dev/null};
 
 	my $json = read_json($response);						# bad JSON kills puppies too
 
